@@ -15,6 +15,8 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.backend.domain.User;
+
 /**
  * Created by sophon on 7/9/17.
  */
@@ -73,7 +75,15 @@ public class AuditableListener {
     }
 
     protected void setAuditValueAgent(Field field, Object entity) throws IllegalArgumentException, IllegalAccessException {
-
+        try {
+            User user = SecurityHelper.getCurrentUser();
+            field.setAccessible(true);
+            if (user != null) {
+                field.set(entity, user.getId());
+            }
+        } catch (Exception e) {
+            LOG.warn(e.getMessage(), e);
+        }
     }
 
     private Field getSingleField(Class<?> clazz, String fieldName) throws IllegalStateException {

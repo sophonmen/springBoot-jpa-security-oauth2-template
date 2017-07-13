@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,14 +17,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.backend.helper.AuditableEntityImpl;
+import com.backend.helper.AuditableEntity;
+import com.backend.helper.AuditableListener;
 
 /**
  * Created by sophon on 7/11/17.
  */
 @Entity
 @Table(name = User.TABLE_NAME)
-public class User extends AuditableEntityImpl implements Serializable {
+@EntityListeners(AuditableListener.class)
+public class User extends AuditableEntity implements Serializable {
     public static final String TABLE_NAME = "users";
     private static final long serialVersionUID = - 2261960444500159223L;
 
@@ -38,7 +41,7 @@ public class User extends AuditableEntityImpl implements Serializable {
     @Column(name = "PASSWORD")
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade= {CascadeType.MERGE, CascadeType.DETACH})
     @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "USER_ID")}, inverseJoinColumns = {
             @JoinColumn(name = "ROLE_ID")}, uniqueConstraints = @UniqueConstraint(columnNames = {"ROLE_ID", "USER_ID"}))
     private Set<Role> roles;

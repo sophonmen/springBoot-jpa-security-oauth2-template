@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
 
-import com.backend.helper.AuditableEntityImpl;
+import com.backend.helper.AuditableEntity;
 import com.backend.helper.AuditableListener;
 
 /**
@@ -22,7 +22,7 @@ import com.backend.helper.AuditableListener;
 @Table(name = Type.TABLE_NAME)
 @SQLDelete(sql = "UPDATE types SET ARCHIVED = 'Y' WHERE TYPE_ID = ?")
 @EntityListeners(AuditableListener.class)
-public class Type extends AuditableEntityImpl implements Serializable {
+public class Type extends AuditableEntity implements Serializable {
     public static final String TABLE_NAME = "types";
     private static final long serialVersionUID = - 4229274924175321832L;
 

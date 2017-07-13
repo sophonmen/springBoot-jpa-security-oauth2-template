@@ -2,18 +2,64 @@ package com.backend.helper;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.MappedSuperclass;
+
 /**
  * Created by sophon on 7/9/17.
  */
-public interface AuditableEntity extends VersionFieldEntity, Status, Serializable {
+@MappedSuperclass
+public class AuditableEntity implements VersionFieldEntity, Status, Serializable {
 
-    Auditable getAuditable();
+    @Embedded
+    protected ArchiveStatus archiveStatus = new ArchiveStatus();
 
-    void setAuditable(Auditable auditable);
+    @Embedded
+    protected Auditable auditable = new Auditable();
 
-    Long getVersion();
+    @Column(name = "AUDIT_VERSION")
+    protected Long version;
 
-    void setVersion(Long version);
+    public Character getArchived() {
+        if (archiveStatus == null) {
+            archiveStatus = new ArchiveStatus();
+        }
+        return archiveStatus.getArchived();
+    }
 
+    public void setArchived(Character archived) {
+        if (archiveStatus == null) {
+            archiveStatus = new ArchiveStatus();
+        }
+        archiveStatus.setArchived(archived);
+    }
+
+    public boolean isActive() {
+        return 'Y' != getArchived();
+    }
+
+    public ArchiveStatus getArchiveStatus() {
+        return archiveStatus;
+    }
+
+    public void setArchiveStatus(ArchiveStatus archiveStatus) {
+        this.archiveStatus = archiveStatus;
+    }
+
+    public Auditable getAuditable() {
+        return auditable;
+    }
+
+    public void setAuditable(Auditable auditable) {
+        this.auditable = auditable;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 }
-
