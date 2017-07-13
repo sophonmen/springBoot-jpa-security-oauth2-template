@@ -23,7 +23,6 @@ public class CustomUserDetails implements UserDetails {
         this.password = byUsername.getPassword();
         this.authorities = byUsername.getRoles().stream().map(role -> {
             String r = role.getRole().toUpperCase();
-            r = r.startsWith("ROLE_") ? r : "ROLE_" + r;
             return new SimpleGrantedAuthority(r);
         }).collect(Collectors.toList());
     }

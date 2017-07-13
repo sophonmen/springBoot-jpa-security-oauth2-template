@@ -26,7 +26,7 @@ public class TypeController {
     @Autowired
     private TypeService service;
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<TypeDTO> create(@RequestBody TypeDTO typeDTO) {
         Type f = TypeServiceImpl.convert(typeDTO);
         service.save(f);
