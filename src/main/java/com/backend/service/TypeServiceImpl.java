@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.backend.dao.TypeDao;
 import com.backend.domain.Type;
-import com.backend.domain.TypeImpl;
 import com.backend.dto.TypeDTO;
 import com.backend.helper.ResponseList;
 
@@ -24,7 +23,7 @@ public class TypeServiceImpl implements TypeService {
     private TypeDao typeDao;
 
     public static Type convert(TypeDTO from) {
-        Type to = new TypeImpl();
+        Type to = new Type();
         to.setId(from.getId());
         to.setType(from.getType());
         return to;

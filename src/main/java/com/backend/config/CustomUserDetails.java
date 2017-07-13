@@ -1,4 +1,4 @@
-package com.backend;
+package com.backend.config;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

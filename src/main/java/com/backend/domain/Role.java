@@ -25,6 +25,9 @@ public class Role implements Serializable, Comparable {
     @Column(name = "ROLE")
     private String role;
 
+    public Role() {
+    }
+
     public Role(String role) {
         this.role = role;
     }

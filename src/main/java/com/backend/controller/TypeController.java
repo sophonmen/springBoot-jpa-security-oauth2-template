@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.backend.domain.Type;
 import com.backend.dto.TypeDTO;
 import com.backend.helper.ResponseList;
-import com.backend.domain.Type;
-import com.backend.domain.TypeImpl;
 import com.backend.service.TypeService;
 import com.backend.service.TypeServiceImpl;
 
@@ -39,7 +38,7 @@ public class TypeController {
     public ResponseEntity<TypeDTO> getById(@PathVariable Long id) {
         Type type = service.findById(id);
         if (type == null) {
-            throw new ObjectNotFoundException(TypeImpl.class, "Object not found");
+            throw new ObjectNotFoundException(Type.class, "Object not found");
         }
         TypeDTO typeDTO= TypeServiceImpl.convert(type);
         return new ResponseEntity<>(typeDTO, HttpStatus.OK);

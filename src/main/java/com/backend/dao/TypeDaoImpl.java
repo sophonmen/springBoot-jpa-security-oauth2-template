@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.backend.domain.Type;
-import com.backend.domain.TypeImpl;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -30,7 +29,7 @@ public class TypeDaoImpl implements TypeDao {
 
     @Override
     public Type findById(Long id) {
-        return entityManager.find(TypeImpl.class, id);
+        return entityManager.find(Type.class, id);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class TypeDaoImpl implements TypeDao {
     public List<Type> getAll() {
         StringBuilder query = new StringBuilder();
         query.append("FROM ");
-        query.append("TypeImpl WHERE ARCHIVED !='Y'");
+        query.append("Type WHERE ARCHIVED !='Y'");
         return (List<Type>) entityManager.createQuery(query.toString()).getResultList();
     }
 

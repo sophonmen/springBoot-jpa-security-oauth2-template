@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.backend.config.CustomUserDetails;
 import com.backend.dao.UserRepository;
 import com.backend.domain.Role;
 import com.backend.domain.User;
@@ -31,7 +32,8 @@ public class TestApplication {
     }
 
     @Autowired
-    public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository userRepository, UserService service) {
+    public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository userRepository, UserService service)
+            throws Exception {
         try {
             if (userRepository.count() == 0) {
                 Set<Role> roles = new TreeSet<>();
