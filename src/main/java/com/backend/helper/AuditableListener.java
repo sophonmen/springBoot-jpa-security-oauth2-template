@@ -11,17 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.backend.domain.User;
+import com.backend.service.UserService;
 
 /**
  * Created by sophon on 7/9/17.
  */
 public class AuditableListener {
     private static final Logger LOG = LoggerFactory.getLogger(AuditableListener.class);
+
+    @Autowired
+    private UserService userService;
 
     @PrePersist
     public void setAuditCreatedBy(Object entity) throws Exception {
@@ -76,7 +81,7 @@ public class AuditableListener {
 
     protected void setAuditValueAgent(Field field, Object entity) throws IllegalArgumentException, IllegalAccessException {
         try {
-            User user = SecurityHelper.getCurrentUser();
+            User user = SecurityHelper.getCurrentUser(userService);
             field.setAccessible(true);
             if (user != null) {
                 field.set(entity, user.getId());
