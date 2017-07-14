@@ -1,5 +1,7 @@
 package com.backend.service;
 
+import java.util.List;
+
 import com.backend.domain.Type;
 import com.backend.helper.ResponseList;
 import com.backend.dto.TypeDTO;
@@ -19,7 +21,7 @@ public interface TypeService {
 
     Type delete (Long id) throws ObjectNotFoundException;
 
-    ResponseList<TypeDTO> getAll();
+    List<TypeDTO> getAll();
 }
 
 

@@ -1,5 +1,11 @@
 package com.backend.service;
 
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.backend.domain.User;
 
 /**
@@ -12,5 +18,7 @@ public interface UserService {
 
     User findById(Long id);
 
+    Page<User> listByPage(Pageable pageable);
+    List<User> getList();
 
 }

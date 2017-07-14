@@ -50,9 +50,9 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public ResponseList<TypeDTO> getAll() {
+    public List<TypeDTO> getAll() {
         List<TypeDTO> types = convert(typeDao.getAll());
-        return new ResponseList<>(types);
+        return types;
     }
 
     @Override
