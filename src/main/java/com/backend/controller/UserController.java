@@ -58,7 +58,8 @@ public class UserController {
         if (user == null) {
             throw new ObjectNotFoundException(User.class, "User not found");
         }
-        logger.error("get user id :" + user.getId());
+        logger.debug("get user id debug :" + user.getId());
+        logger.error("get user id error :" + user.getId());
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

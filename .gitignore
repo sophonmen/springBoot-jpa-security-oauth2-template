@@ -11,6 +11,7 @@
 .springBeans
 logs/
 .idea/workspace.xml
+upload-dir/
 
 ### IntelliJ IDEA ###
 .idea
